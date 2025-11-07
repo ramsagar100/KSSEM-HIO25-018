@@ -4,7 +4,7 @@ import { getDatabase, ref, onValue } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyDbd7mCvD8Tr2gQWBc4Wbhjmd8m6LEdqDI",
   authDomain: "electronics-project-cb597.firebaseapp.com",
-  databaseURL: "https://electronics-project-cb597-default-rtdb.asia-southeast1.firebasedatabase.app", // ✅ important
+  databaseURL: "https://electronics-project-cb597-default-rtdb.asia-southeast1.firebasedatabase.app/SensorData/flow_rate", // ✅ important
   projectId: "electronics-project-cb597",
   storageBucket: "electronics-project-cb597.appspot.com",
   messagingSenderId: "1022972751671",
