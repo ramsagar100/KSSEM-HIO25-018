@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 const RecentCard = () => {
   return (
     <>
+    
       <div className="content grid3 mtop">
-        {list.map((val, index) => {
+        {
+        
+        list.map((val, index) => {
           const { cover, location, name, price, HREF, route } = val;
           return (
             <div className="box shadow" key={index}>
@@ -34,7 +37,7 @@ const RecentCard = () => {
                     <button className="btn2">Start</button>
                   </a>
                 ) : (
-                  <Link to={route || "/Usage"}>
+                  <Link to={route || `/Usage${name}`}>
                     <button className="btn2">Start</button>
                   </Link>
                 )}

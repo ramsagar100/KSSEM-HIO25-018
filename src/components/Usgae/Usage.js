@@ -1,16 +1,51 @@
-import React from "react"; // Removed useEffect and useState
+import React, { useState, useEffect } from "react";
 import "./Usage.css";
 import CurveGraph from "./Graph";
 
+const CHANNEL_ID = "3152998";
+const READ_API_KEY = "NWTU8JZHC0BHR2JK";
+const POLL_INTERVAL_MS = 20000; // 20s
+const API_URL = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds.json?api_key=${READ_API_KEY}&results=1`;
+
 const Usage = () => {
-  // ✅ Set the sensor value to a constant 50
-  const sensorValue = 50;
-  const maxValue = 100;
+  const [flowRate, setFlowRate] = useState("-");
+  const [soilMoisture, setSoilMoisture] = useState("-");
+  const [totalVolume, setTotalVolume] = useState("-");
+  const [waterLevel, setWaterLevel] = useState("-");
+  const [lastUpdate, setLastUpdate] = useState("-");
 
-  // The animation 'useEffect' hook has been removed.
+  const fetchData = async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      if (data.feeds && data.feeds.length > 0) {
+        const lastEntry = data.feeds[0];
+        setFlowRate(parseFloat(lastEntry.field1).toFixed(2));
+        setSoilMoisture(parseFloat(lastEntry.field2).toFixed(0));
+        setTotalVolume(parseFloat(lastEntry.field3).toFixed(2));
+        setWaterLevel(parseFloat(lastEntry.field4).toFixed(0));
+        setLastUpdate(new Date(lastEntry.created_at).toLocaleString());
+      }
+    } catch (err) {
+      console.error("Failed to fetch ThingSpeak data:", err);
+    }
+  };
 
-  const percentage = sensorValue / maxValue;
+  useEffect(() => {
+    fetchData();
+    const intervalId = setInterval(fetchData, POLL_INTERVAL_MS);
+    return () => clearInterval(intervalId);
+  }, []);
 
+  const maxValue = 100; // Max for top gauge percentage
+
+  // Function to calculate stroke-dashoffset for semicircle
+  const calculateDashOffset = (value) => {
+    const arcLength = Math.PI * 90; // semicircle length
+    return arcLength * (1 - (value !== "-" ? value / maxValue : 0));
+  };
+
+  // Dummy usage data for Today/Weekly/Monthly
   const usageData = [
     { label: "Today", value: 30, max: 100, unit: "L", color: "#00c6ff" },
     { label: "Weekly", value: 65, max: 100, unit: "L", color: "#ff6347" },
@@ -19,16 +54,12 @@ const Usage = () => {
 
   return (
     <section className="usage-statistics">
-      {/* ✅ Real-time Main Gauge (Blynk-style) */}
+      {/* --- Top Live Gauge --- */}
       <div className="main-gauge">
-        <h2>Live Sensor Reading</h2>
+        <h2>Live Flow Rate</h2>
         <div className="blynk-gauge">
-          <svg
-            viewBox="0 0 200 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="gauge-svg"
-          >
-            {/* Background arc */}
+          <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" className="gauge-svg">
+            {/* Background semicircle */}
             <path
               d="M10 90 A90 90 0 0 1 190 90"
               fill="none"
@@ -36,7 +67,7 @@ const Usage = () => {
               strokeWidth="8"
               strokeLinecap="round"
             />
-            {/* Foreground arc (fills left→right) */}
+            {/* Foreground semicircle (value) */}
             <path
               d="M10 90 A90 90 0 0 1 190 90"
               fill="none"
@@ -44,13 +75,12 @@ const Usage = () => {
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={`${Math.PI * 90}`}
-              strokeDashoffset={`${Math.PI * 90 * (1 - percentage)}`}
-              // Removed the inline transition style, as it's not needed for a static value
+              strokeDashoffset={`${calculateDashOffset(flowRate)}`}
+              style={{ transition: "stroke-dashoffset 0.6s ease" }}
             />
           </svg>
           <div className="blynk-value">
-            {sensorValue}
-            <span className="unit">L</span>
+            {flowRate} <span className="unit">L/min</span>
           </div>
           <div className="blynk-range">
             <span>0L</span>
@@ -59,7 +89,7 @@ const Usage = () => {
         </div>
       </div>
 
-      {/* 🔹 Existing Smaller Gauges */}
+      {/* --- Dummy Smaller Gauges --- */}
       <div className="usage-container">
         {usageData.map((data, index) => {
           const percentage = data.value / data.max;
@@ -69,11 +99,7 @@ const Usage = () => {
           return (
             <div className="card" key={index}>
               <h3>{data.label} Usage</h3>
-              <svg
-                viewBox="0 0 100 50"
-                xmlns="http://www.w3.org/2000/svg"
-                className="small-gauge"
-              >
+              <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg" className="small-gauge">
                 <path
                   d="M5 45 A45 45 0 0 1 95 45"
                   fill="none"
@@ -102,6 +128,11 @@ const Usage = () => {
         })}
       </div>
 
+      <p style={{ textAlign: "center", marginTop: "20px" }}>
+        Last Updated: {lastUpdate}
+      </p>
+
+      {/* --- Curve Graph --- */}
       <h1 className="usage-title">Overall Water Usage</h1>
       <CurveGraph title="Monthly Usage Trend (This Year vs. Last Year)" />
     </section>
