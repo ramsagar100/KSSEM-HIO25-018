@@ -1,7 +1,7 @@
 import React from "react"
 import "./blog.css"
 import RecentCard from "../home/recent/RecentCard"
-// import { Community1 } from "../data/Data"
+import { Community1 } from "../data/Data"
 import { Link } from "react-router-dom"
 const Blog = () => {
   return (

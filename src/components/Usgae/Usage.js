@@ -1,10 +1,16 @@
-import React from "react";
+import React from "react"; // Removed useEffect and useState
 import "./Usage.css";
 import CurveGraph from "./Graph";
 
 const Usage = () => {
-  // UX Improvement: Consolidate data into a clear array of objects.
-  // This makes it easier to manage and fixes the gauge logic.
+  // ✅ Set the sensor value to a constant 50
+  const sensorValue = 50;
+  const maxValue = 100;
+
+  // The animation 'useEffect' hook has been removed.
+
+  const percentage = sensorValue / maxValue;
+
   const usageData = [
     { label: "Today", value: 30, max: 100, unit: "L", color: "#00c6ff" },
     { label: "Weekly", value: 65, max: 100, unit: "L", color: "#ff6347" },
@@ -12,41 +18,83 @@ const Usage = () => {
   ];
 
   return (
-    // UI Change: Moved the gauge container *above* the h1 title
-    // Also removed the unnecessary <></> Fragment
     <section className="usage-statistics">
-      
+      {/* ✅ Real-time Main Gauge (Blynk-style) */}
+      <div className="main-gauge">
+        <h2>Live Sensor Reading</h2>
+        <div className="blynk-gauge">
+          <svg
+            viewBox="0 0 200 100"
+            xmlns="http://www.w3.org/2000/svg"
+            className="gauge-svg"
+          >
+            {/* Background arc */}
+            <path
+              d="M10 90 A90 90 0 0 1 190 90"
+              fill="none"
+              stroke="#ddd"
+              strokeWidth="8"
+              strokeLinecap="round"
+            />
+            {/* Foreground arc (fills left→right) */}
+            <path
+              d="M10 90 A90 90 0 0 1 190 90"
+              fill="none"
+              stroke="#007bff"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeDasharray={`${Math.PI * 90}`}
+              strokeDashoffset={`${Math.PI * 90 * (1 - percentage)}`}
+              // Removed the inline transition style, as it's not needed for a static value
+            />
+          </svg>
+          <div className="blynk-value">
+            {sensorValue}
+            <span className="unit">L</span>
+          </div>
+          <div className="blynk-range">
+            <span>0L</span>
+            <span>{maxValue}L</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 🔹 Existing Smaller Gauges */}
       <div className="usage-container">
         {usageData.map((data, index) => {
-          // UX Fix: Correctly calculate gauge rotation.
-          // The old logic (180 - value) was incorrect.
-          // This calculates the percentage and converts it to degrees (0-180).
-          // We use (1 - percentage) because 0% fill = 180deg rotation (hidden).
           const percentage = data.value / data.max;
-          const rotation = (1 - percentage) * 180;
+          const dashLength = Math.PI * 45;
+          const dashOffset = dashLength * (1 - percentage);
 
           return (
             <div className="card" key={index}>
               <h3>{data.label} Usage</h3>
-              <div className="semicircle-wrapper">
-                <div className="semicircle-bg">
-                  <div
-                    className="semicircle-fill"
-                    style={{
-                      // Apply the corrected rotation
-                      transform: `rotate(${rotation}deg)`,
-                      background: data.color,
-                    }}
-                  ></div>
-                </div>
-                <div className="center-text">
-                  {/* Display the value and unit */}
-                  <span>{`${data.value}${data.unit}`}</span>
-                </div>
-              </div>
+              <svg
+                viewBox="0 0 100 50"
+                xmlns="http://www.w3.org/2000/svg"
+                className="small-gauge"
+              >
+                <path
+                  d="M5 45 A45 45 0 0 1 95 45"
+                  fill="none"
+                  stroke="#ddd"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M5 45 A45 45 0 0 1 95 45"
+                  fill="none"
+                  stroke={data.color}
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray={`${dashLength}`}
+                  strokeDashoffset={`${dashOffset}`}
+                  style={{ transition: "stroke-dashoffset 0.6s ease" }}
+                />
+              </svg>
+              <div className="center-text">{data.value}{data.unit}</div>
               <div className="range">
                 <span>0{data.unit}</span>
-                {/* UX Improvement: Show the actual max value */}
                 <span>{data.max}{data.unit}</span>
               </div>
             </div>
@@ -55,8 +103,6 @@ const Usage = () => {
       </div>
 
       <h1 className="usage-title">Overall Water Usage</h1>
-      
-      {/* UI Improvement: Pass a title to the graph component */}
       <CurveGraph title="Monthly Usage Trend (This Year vs. Last Year)" />
     </section>
   );
