@@ -12,9 +12,9 @@ const Usage = () => {
   ];
 
   return (
-    // UI Improvement: Use a semantic <section> wrapper
+    // UI Change: Moved the gauge container *above* the h1 title
+    // Also removed the unnecessary <></> Fragment
     <section className="usage-statistics">
-      <h1 className="usage-title">Overall Water Usage</h1>
       
       <div className="usage-container">
         {usageData.map((data, index) => {
@@ -53,6 +53,8 @@ const Usage = () => {
           );
         })}
       </div>
+
+      <h1 className="usage-title">Overall Water Usage</h1>
       
       {/* UI Improvement: Pass a title to the graph component */}
       <CurveGraph title="Monthly Usage Trend (This Year vs. Last Year)" />

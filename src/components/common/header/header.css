@@ -1,8 +1,27 @@
+/* --- CSS Variables for easy theming --- */
+:root {
+  --header-bg: #f0faff;
+  --header-shadow: rgba(0, 0, 0, 0.08);
+  --primary-color: #075254; /* User icon bg */
+  --secondary-color: #27ae60; /* Button bg */
+  --secondary-hover: #217391; /* Button hover */
+  --text-color: #333;
+  --text-light: #fff;
+  --mobile-nav-bg: #27a9ae;
+  --header-height: 90px; /* Standardized height */
+}
+
+/* --- Global style for body scroll lock --- */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* --- Header --- */
 header {
-  background-color: #f0faff;
-  height: 100px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  padding: 10px 0;
+  background-color: var(--header-bg);
+  height: var(--header-height);
+  box-shadow: 0 5px 20px var(--header-shadow);
+  padding: 0 20px; /* Use padding for spacing */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -12,113 +31,104 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
+  max-width: 1200px; /* Added max-width for large screens */
+  margin: 0 auto; /* Center the container */
 }
 
+/* --- Logo --- */
+.logo {
+  flex-shrink: 0; /* Prevents logo from shrinking */
+}
 .logo-text {
   font-size: 24px;
-  font-weight: bold;
-  color: #27ae60;
+  font-weight: 700;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
-.nav ul {
+/* --- Desktop Nav --- */
+.nav {
+  /* This makes the nav take up available space, pushing items apart */
+  flex-grow: 1; 
   display: flex;
-  gap: 20px;
+  justify-content: center; /* Center the nav links */
+}
+
+.nav ul.flex {
+  display: flex;
+  gap: 25px;
   list-style: none;
+  align-items: center;
 }
 
 .nav li a {
   text-decoration: none;
   font-weight: 500;
-  color: #333;
-  padding: 6px 12px;
+  color: var(--text-color);
+  padding: 8px 14px;
   border-radius: 8px;
-  transition: background 0.3s, color 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+  font-size: 16px;
 }
 
-.nav li a:hover {
-  background-color: #ebd882;
-  color: white;
+/* UI Improvement: Modern underline hover effect */
+.nav li a:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.nav li a:hover,
+.nav li a:focus {
+  color: var(--primary-color);
+}
+
+.nav li a:hover:after,
+.nav li a:focus:after {
+  width: 100%;
+}
+
+/* --- Right Side (User & Button) --- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0; /* Prevents this block from shrinking */
 }
 
 .user {
   display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user h4 {
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 15px;
 }
 
 .user i {
-  background-color: #075254;
-  padding: 16px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  font-size: 16px;
+  width: 40px; /* Fixed circular size */
+  height: 40px;
+  padding: 0;
   border-radius: 50%;
-}
-
-.badge {
-  background: #27ae60;
-  color: #fff;
-  padding: 3px 8px;
-  border-radius: 50px;
-  font-size: 12px;
-  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-login {
-  background: #27ae60;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-login:hover {
-  background: #217391;
-}
-
-.toggle {
-  display: none;
-}
-
-.button {
-  margin-left: 300px;
-  margin-right: 20px;
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .nav ul {
-    display: none;
-    flex-direction: column;
-    background: #27a9ae;
-    position: absolute;
-    top: 10vh;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-  }
-
-  .nav.small ul {
-    display: flex;
-  }
-
-  .nav li a {
-    color: white;
-  }
-
-  .toggle {
-    display: block;
-  }
-
-  .button {
-    display: none;
-  }
-}
-
-.logo {
-  position: absolute;
-  transform: translateX(-100px);
-}
-
-.logo img {
-  width: 7%;
-  border-radius: 50%;
-}
+  background: var(--secondary-color);
+  border: none;}
