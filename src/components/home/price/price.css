@@ -1,0 +1,153 @@
+.price {
+  text-align: center;
+}
+
+.price .content .box {
+  width: 27%; /* 3 cards per row */
+  padding: 30px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* soft shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f8fafb;
+  color: black;
+}
+
+.price button {
+  margin-bottom: 20px;
+}
+
+.price .box:nth-child(1) .topbtn button,
+.price .box:nth-child(3) .topbtn button {
+  display: none;
+}
+
+.price h3 {
+  font-size: 22px;
+}
+
+.price h1 {
+  font-size: 60px;
+}
+
+.price h1 span {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.price ul {
+  margin-top: 40px;
+}
+
+.price ul li {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.price label {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.price .btn5 {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .price .content {
+    flex-direction: column;
+  }
+
+  .price .content .box {
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+  }
+}
+
+.price .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between cards */
+  justify-content: center;
+}
+
+/* Left-to-right top red ribbon */
+.price .content .box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%; /* Start off-screen */
+  height: 6px;
+  width: 100%;
+  background: #e74c3c; /* Red */
+  transition: left 2s ease;
+}
+
+/* Right-to-left bottom blue ribbon */
+.price .content .box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -100%; /* Start off-screen */
+  height: 6px;
+  width: 100%;
+  background: #3498db; /* Blue */
+  transition: right 2s ease;
+}
+
+.price .content .box:hover::before {
+  left: 0; /* Animate to the left */
+}
+
+.price .content .box:hover::after {
+  right: 0; /* Animate to the right */
+}
+
+.content img {
+  border-radius: 3px;
+  width: 300px;
+  height: 200px;
+}
+
+.shadow {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #722327;
+  width: 27vw;
+  border-radius: 16px ;
+}.shadow {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #3ed1b1, #1abc9c);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  width: 27vw;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+

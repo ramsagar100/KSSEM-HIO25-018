@@ -1,0 +1,124 @@
+header {
+  background-color: #f0faff;
+  height: 100px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #27ae60;
+  text-decoration: none;
+}
+
+.nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav li a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav li a:hover {
+  background-color: #ebd882;
+  color: white;
+}
+
+.user {
+  display: flex;
+}
+
+.user i {
+  background-color: #075254;
+  padding: 16px;
+  border-radius: 50%;
+}
+
+.badge {
+  background: #27ae60;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 50px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.btn-login {
+  background: #27ae60;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background: #217391;
+}
+
+.toggle {
+  display: none;
+}
+
+.button {
+  margin-left: 300px;
+  margin-right: 20px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .nav ul {
+    display: none;
+    flex-direction: column;
+    background: #27a9ae;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .nav.small ul {
+    display: flex;
+  }
+
+  .nav li a {
+    color: white;
+  }
+
+  .toggle {
+    display: block;
+  }
+
+  .button {
+    display: none;
+  }
+}
+
+.logo {
+  position: absolute;
+  transform: translateX(-100px);
+}
+
+.logo img {
+  width: 7%;
+  border-radius: 50%;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>soil management</title>
+        <style>
+    #chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    #chat-frame {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: none; /* hidden initially */
+      z-index: 1000;
+    }
+  </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+
+
+  <!-- Chat button -->
+  <button id="chat-button">Chat with us</button>
+
+ <!-- Botpress iframe -->
+<iframe id="chat-frame" src="https://cdn.botpress.cloud/webchat/v3.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/10/10/19/20251010193149-H27MNZ5R.json"></iframe>
+
+<script>
+  const chatButton = document.getElementById('chat-button');
+  const chatFrame = document.getElementById('chat-frame');
+  let open = false;
+
+  chatButton.addEventListener('click', () => {
+    if (!open) {
+      chatFrame.style.display = 'block';
+      open = true;
+    } else {
+      chatFrame.style.display = 'none';
+      open = false;
+    }
+  });
+</script>
+  
+  </body>
+  
+</html>

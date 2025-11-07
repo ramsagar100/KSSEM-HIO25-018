@@ -1,0 +1,34 @@
+.recent .text {
+  padding: 30px;
+}
+.recent .category span {
+  padding: 4px 15px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+.recent .category i {
+  font-size: 20px;
+  color: #bec7d8;
+}
+.recent p {
+  color: #72809d;
+}
+.recent .button {
+  border-top: 1px solid #e4e8f3;
+  padding: 10px 30px;
+}
+.category {
+  display: flex;
+  gap: 10px;
+  color: red;
+  font-size: 24px;
+}
+.recent .btn2 {
+  margin-left: 120px;
+transform: scale(1.5);
+}
+h3{
+  color: black;
+}
