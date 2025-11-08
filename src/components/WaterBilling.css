@@ -1,0 +1,172 @@
+/* ---------- Global Styles ---------- */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #dbe6f6, #c5796d);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.billing-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* ---------- Card Design ---------- */
+.card,
+.login-card,
+.owner-portal,
+.tenant-portal,
+.bill-card,
+.loading-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Headings ---------- */
+h2, h3 {
+  text-align: center;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* ---------- Inputs ---------- */
+input, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin: 8px 0 15px 0;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #4a90e2;
+}
+
+/* ---------- Buttons ---------- */
+button {
+  background: #4a90e2;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+  width: 100%;
+  margin-top: 5px;
+}
+
+button:hover {
+  background: #357abd;
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Layout ---------- */
+.owner-portal .card,
+.tenant-portal .card {
+  margin-bottom: 25px;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* ---------- Quiz Section ---------- */
+.quiz {
+  background: #f4f7fc;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 15px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.quiz label {
+  font-weight: 500;
+  display: block;
+  margin: 8px 0 4px 0;
+}
+
+.quiz input {
+  border-color: #ddd;
+}
+
+/* ---------- Bill Card ---------- */
+.bill-card {
+  text-align: center;
+}
+
+.bill-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.bill-card h2 {
+  margin-bottom: 20px;
+}
+
+/* ---------- Loading ---------- */
+.loading-card {
+  text-align: center;
+  animation: fadein 0.8s ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---------- QR Section ---------- */
+#qrSection {
+  text-align: center;
+}
+
+#qrCode {
+  margin: 10px auto;
+  display: block;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .billing-wrapper {
+    padding: 10px;
+  }
+
+  .card, .login-card, .owner-portal, .tenant-portal {
+    padding: 20px;
+  }
+
+  input, textarea {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

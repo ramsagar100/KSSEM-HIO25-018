@@ -285,3 +285,51 @@
   font-size: 1.2em;
   font-weight: bold;
 }
+/* --- Water Tank Visual Enhancements --- */
+.tank-fill {
+  background: linear-gradient(180deg, #317699 0%, #3b77a4 100%);
+  transition: height 1s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Optional: animated water wave effect */
+.tank-fill::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 200%;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  animation: waveMove 3s linear infinite;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Tank status label below tank */
+.tank-status {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #338fcc;
+  text-align: center;
+}
+
+/* Optional: color change based on water level */
+.tank.low .tank-fill {
+  background: linear-gradient(180deg, #477dc8 0%, #356ab5 100%);
+}
+
+.tank.high .tank-fill {
+  background: linear-gradient(180deg, #4077b3 0%, #3286b3 100%);
+}

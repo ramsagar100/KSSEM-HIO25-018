@@ -17,6 +17,7 @@ import Login from "../login/src/components/Login";
 import Usage from "../Usgae/Usage";
 import UsageGarden from "../Usgae/UsageGarden";
 import UsageWaterTank from "../Usgae/UsageWaterTank";
+import WaterBilling from "../WaterBilling";
 // LayoutWrapper to control Header/Footer visibility
 const LayoutWrapper = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const LayoutWrapper = () => {
         <Route path="/usageGarden" element={<UsageGarden />} />
         <Route path="/UsagewaterTank" element={<UsageWaterTank/>} />
         {/* Fixed route path: consistent lowercase naming */}
+        <Route path="/generateBill" element={<WaterBilling/>} />
 
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />

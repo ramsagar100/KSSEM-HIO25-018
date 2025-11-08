@@ -2,22 +2,35 @@ import React, { useState, useEffect } from "react";
 import "./Usage.css";
 import CurveGraph from "./Graph";
 
-const CHANNEL_ID = "3152998";
-const READ_API_KEY = "NWTU8JZHC0BHR2JK";
+const CHANNEL_ID = "3153117";
+const READ_API_KEY = "ZJHFP876HZ9DBOAD";
 const POLL_INTERVAL_MS = 20000; // 20s
 const API_URL = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds.json?api_key=${READ_API_KEY}&results=1`;
 
+const MAX_DISTANCE = 30; // cm - adjust this to your tank height (sensor to tank bottom)
+const MIN_DISTANCE = 3; // cm - when tank is full (distance to water is very low)
+
 const UsagewaterTank = () => {
-  const [waterLevel, setWaterLevel] = useState("-");
+  const [sensorValue, setSensorValue] = useState("-");
+  const [fillPercentage, setFillPercentage] = useState(0);
   const [lastUpdate, setLastUpdate] = useState("-");
 
   const fetchData = async () => {
     try {
       const response = await fetch(API_URL);
       const data = await response.json();
+
       if (data.feeds && data.feeds.length > 0) {
         const lastEntry = data.feeds[0];
-        setWaterLevel(parseFloat(lastEntry.field4).toFixed(0)); // ultrasonic water level
+        const rawValue = parseFloat(lastEntry.field4);
+
+        if (!isNaN(rawValue)) {
+          // Map 0-1000 value to fill %
+          const percent = ((1000 - rawValue) / 1000) * 100;
+          setSensorValue(rawValue.toFixed(0));
+          setFillPercentage(percent.toFixed(0));
+        }
+
         setLastUpdate(new Date(lastEntry.created_at).toLocaleString());
       }
     } catch (err) {
@@ -31,30 +44,41 @@ const UsagewaterTank = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Calculate fill height in percentage (0 = empty, 100 = full)
-  const fillPercentage = waterLevel !== "-" ? Math.min(Math.max(waterLevel, 0), 100) : 0;
+  const getStatus = () => {
+    if (fillPercentage < 25) return "🚨 Low Water Level";
+    if (fillPercentage < 75) return "💧 Normal Level";
+    return "✅ Tank Full";
+  };
 
   return (
     <section className="usage-statistics">
-      <h2>Water Tank Level</h2>
-      <div className="tank-gauge-container">
+      <h2>🚰 Water Tank Level Monitor</h2>
+
+      <div className="tank-visual">
         <div className="tank">
           <div
             className="tank-fill"
             style={{ height: `${fillPercentage}%` }}
           ></div>
+          <div className="tank-overlay">
+            <div className="tank-label">{fillPercentage}%</div>
+          </div>
         </div>
-        <div className="tank-value">{waterLevel !== "-" ? `${waterLevel}%` : "-"}</div>
+        <p className="tank-status">{getStatus()}</p>
       </div>
 
-      <p style={{ textAlign: "center", marginTop: "20px" }}>
-        Last Updated: {lastUpdate}
-      </p>
+      <div className="sensor-info">
+        <p>🔼 Sensor Value: {sensorValue}</p>
+        <p>📅 Last Updated: {lastUpdate}</p>
+      </div>
 
-      {/* Dummy smaller gauges (can keep for other stats) */}
+      <h3 style={{ marginTop: "30px" }}>
+        📊 Monthly Usage Trend (This Year vs. Last Year)
+      </h3>
       <CurveGraph title="Monthly Usage Trend (This Year vs. Last Year)" />
     </section>
   );
 };
+
 
 export default UsagewaterTank;
