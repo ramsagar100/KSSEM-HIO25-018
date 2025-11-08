@@ -7,7 +7,7 @@ const READ_API_KEY = "NWTU8JZHC0BHR2JK";
 const POLL_INTERVAL_MS = 20000; // 20s
 const API_URL = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds.json?api_key=${READ_API_KEY}&results=1`;
 
-const UsageWater_Tank = () => {
+const UsagewaterTank = () => {
   const [waterLevel, setWaterLevel] = useState("-");
   const [lastUpdate, setLastUpdate] = useState("-");
 
@@ -57,4 +57,4 @@ const UsageWater_Tank = () => {
   );
 };
 
-export default UsageWater_Tank;
+export default UsagewaterTank;

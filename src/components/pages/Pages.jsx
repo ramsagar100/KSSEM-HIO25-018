@@ -16,8 +16,8 @@ import Contact from "../contact/Contact";
 import Login from "../login/src/components/Login";
 import Usage from "../Usgae/Usage";
 import UsageGarden from "../Usgae/UsageGarden";
-import UsageWater_Tank from "../Usgae/Usagewater_Tank";
-// This wrapper allows access to location inside Router
+import UsageWaterTank from "../Usgae/UsageWaterTank";
+// LayoutWrapper to control Header/Footer visibility
 const LayoutWrapper = () => {
   const location = useLocation();
   const hideHeaderFooter = location.pathname === "/login";
@@ -31,7 +31,9 @@ const LayoutWrapper = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/usageBathroom" element={<Usage />} />
         <Route path="/usageGarden" element={<UsageGarden />} />
-        
+        <Route path="/UsagewaterTank" element={<UsageWaterTank/>} />
+        {/* Fixed route path: consistent lowercase naming */}
+
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/blog" element={<Blog />} />

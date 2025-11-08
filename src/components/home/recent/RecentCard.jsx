@@ -67,7 +67,7 @@ const RecentCard = () => {
                     <button className="btn2">Start</button>
                   </a>
                 ) : (
-                  <Link to={route || "/Usage"}>
+                  <Link to={route || `/Usage${name}`}>
                     <button className="btn2">Start</button>
                   </Link>
                 )}
