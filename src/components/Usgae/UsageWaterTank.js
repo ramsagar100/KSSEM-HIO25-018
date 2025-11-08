@@ -26,7 +26,7 @@ const UsagewaterTank = () => {
 
         if (!isNaN(rawValue)) {
           // Map 0-1000 value to fill %
-          const percent = ((1000 - rawValue) / 1000) * 100;
+          const percent = (( rawValue) / 1000) * 100;
           setSensorValue(rawValue.toFixed(0));
           setFillPercentage(percent.toFixed(0));
         }
