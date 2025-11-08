@@ -80,7 +80,7 @@ export const list5=[
   {
     id: 4,
     cover: "../images/list/p-4.png",
-    name:"overall Water Usage",
+    name:"water_Tank",
     price:"67.7Liters"
   },
   {

@@ -255,3 +255,33 @@
   margin-top: 1rem;
   color: #333;
 }
+.tank-gauge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.tank {
+  width: 100px;
+  height: 200px;
+  border: 3px solid #007bff;
+  border-radius: 6px;
+  position: relative;
+  background-color: #e0e0e0;
+  overflow: hidden;
+}
+
+.tank-fill {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #007bff;
+  transition: height 0.6s ease;
+}
+
+.tank-value {
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}

@@ -15,7 +15,8 @@ import Services from "../services/Services";
 import Contact from "../contact/Contact";
 import Login from "../login/src/components/Login";
 import Usage from "../Usgae/Usage";
-
+import UsageGarden from "../Usgae/UsageGarden";
+import UsageWater_Tank from "../Usgae/Usagewater_Tank";
 // This wrapper allows access to location inside Router
 const LayoutWrapper = () => {
   const location = useLocation();
@@ -28,7 +29,8 @@ const LayoutWrapper = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/usage" element={<Usage />} />
+        <Route path="/usageBathroom" element={<Usage />} />
+        <Route path="/usageGarden" element={<UsageGarden />} />
         
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
