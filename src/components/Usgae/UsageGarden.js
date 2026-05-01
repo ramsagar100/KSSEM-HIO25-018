@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Usage.css";
 import CurveGraph from "./Graph";
-
+import PlantAnimation from "./plant_animation/PlantAnimation";
 const CHANNEL_ID = "3153117";
 const READ_API_KEY = "ZJHFP876HZ9DBOAD";
 const POLL_INTERVAL_MS = 20000;
@@ -60,6 +60,7 @@ const UsageGarden = () => {
   return (
     <section className="usage-statistics">
       <div className="main-gauge">
+        <PlantAnimation moisture={soilMoisture} />
         <h2>🌱 Live Soil Moisture</h2>
 
         <div className="blynk-gauge">

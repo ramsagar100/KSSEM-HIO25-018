@@ -1,172 +1,85 @@
-/* ---------- Global Styles ---------- */
-body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #dbe6f6, #c5796d);
-  min-height: 100vh;
+/* Center the main card */
+.billing-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  margin: 0;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   padding: 20px;
-  color: #333;
 }
 
-.billing-wrapper {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-}
-
-/* ---------- Card Design ---------- */
-.card,
-.login-card,
-.owner-portal,
-.tenant-portal,
-.bill-card,
-.loading-card {
-  background: #fff;
+/* Card UI */
+.billing-card {
+  background: #ffffff;
+  width: 360px;
+  padding: 25px;
   border-radius: 20px;
-  padding: 25px 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* ---------- Headings ---------- */
-h2, h3 {
   text-align: center;
-  color: #444;
-  margin-bottom: 20px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
 }
 
-/* ---------- Inputs ---------- */
-input, textarea {
-  width: 100%;
-  padding: 12px 15px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  margin: 8px 0 15px 0;
-  font-size: 15px;
-  outline: none;
-  transition: border-color 0.2s ease;
+/* Titles */
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #0a4fff;
 }
 
-input:focus, textarea:focus {
-  border-color: #4a90e2;
-}
-
-/* ---------- Buttons ---------- */
-button {
-  background: #4a90e2;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.1s ease;
-  width: 100%;
-  margin-top: 5px;
-}
-
-button:hover {
-  background: #357abd;
-  transform: scale(1.02);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* ---------- Layout ---------- */
-.owner-portal .card,
-.tenant-portal .card {
-  margin-bottom: 25px;
-}
-
-textarea {
-  resize: none;
-  height: 100px;
-}
-
-/* ---------- Quiz Section ---------- */
-.quiz {
-  background: #f4f7fc;
-  padding: 20px;
-  border-radius: 15px;
-  margin-top: 15px;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
-}
-
-.quiz label {
-  font-weight: 500;
-  display: block;
-  margin: 8px 0 4px 0;
-}
-
-.quiz input {
-  border-color: #ddd;
-}
-
-/* ---------- Bill Card ---------- */
-.bill-card {
-  text-align: center;
-}
-
-.bill-card p {
-  margin: 10px 0;
+/* Sections */
+.section p {
   font-size: 16px;
+  margin: 5px;
+  color: #555;
 }
 
-.bill-card h2 {
-  margin-bottom: 20px;
+.section h1,
+.section h2 {
+  margin: 5px 0 15px 0;
+  color: #222;
 }
 
-/* ---------- Loading ---------- */
-.loading-card {
-  text-align: center;
-  animation: fadein 0.8s ease;
+/* Amount highlight */
+.amount {
+  color: #e60000;
+  font-size: 32px;
+  font-weight: 700;
 }
 
-@keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ---------- QR Section ---------- */
-#qrSection {
-  text-align: center;
-}
-
-#qrCode {
-  margin: 10px auto;
-  display: block;
-  border: 2px solid #eee;
-  border-radius: 10px;
+/* QR Styling */
+.qr-wrapper {
+  margin-top: 10px;
   padding: 10px;
+  background: white;
+  display: inline-block;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 600px) {
-  .billing-wrapper {
-    padding: 10px;
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  .card, .login-card, .owner-portal, .tenant-portal {
-    padding: 20px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  input, textarea {
-    font-size: 14px;
+/* QR zoom-in effect */
+.zoomIn {
+  animation: zoomIn 0.7s ease-in-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
   }
-
-  button {
-    font-size: 14px;
-    padding: 10px;
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

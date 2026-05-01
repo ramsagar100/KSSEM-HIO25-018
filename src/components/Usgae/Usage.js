@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Usage.css";
 import CurveGraph from "./Graph";
-
+import TapAnimation from "./TapAnimation/TapAnimation";
 const CHANNEL_ID = "3152998";
 const READ_API_KEY = "NWTU8JZHC0BHR2JK";
 const POLL_INTERVAL_MS = 20000; // 20s
@@ -56,6 +56,7 @@ const Usage = () => {
     <section className="usage-statistics">
       {/* --- Top Live Gauge --- */}
       <div className="main-gauge">
+        <TapAnimation/>
         <h2>Live Flow Rate</h2>
         <div className="blynk-gauge">
           <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" className="gauge-svg">
